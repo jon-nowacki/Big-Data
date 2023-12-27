@@ -1,5 +1,11 @@
 # Big Data
 
-Spark uses postgresql
-Snowflake uses ANSI SQL
+Platforms covered:
+
+* Databricks
+* Snowflake
+
+SQL covered:
+* postgresql (PySpark)
+* ANSI SQL (snowflake)
 
