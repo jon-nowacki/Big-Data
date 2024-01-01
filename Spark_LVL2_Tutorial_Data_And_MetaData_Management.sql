@@ -1,6 +1,6 @@
 -- Databricks notebook source
 -- MAGIC %md
--- MAGIC ### SQL Objects
+-- MAGIC ### SQL Objects - Managing Data, Metadata and More
 -- MAGIC [Spark SQL](https://spark.apache.org/docs/latest/sql-programming-guide.html)
 -- MAGIC * Create databases
 -- MAGIC * Select Databases
