@@ -2,10 +2,11 @@
 
 Platforms covered:
 
-* Databricks
-* Snowflake
+Databricks
+* postgresql
+* PySpark
 
-SQL covered:
-* postgresql (PySpark)
-* ANSI SQL (snowflake)
+Snowflake
+* ANSI SQL
+
 
