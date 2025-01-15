@@ -1,4 +1,6 @@
-Limit function 
+#### Multiple ways to speed up Snowflake Development
+
+Limit function
 
 ```
 SET DEBUG = 1;
