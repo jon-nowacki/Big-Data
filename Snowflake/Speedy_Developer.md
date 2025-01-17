@@ -1,4 +1,11 @@
-#### Multiple ways to speed up Snowflake Development
+#### Shrink Table Size to Speed Up Development
+The goal of this page is to establish best practices to speed up development time.  These techniques are rated into three categories:
+
+1) Quick and Dirty - Good for small searches. Takes only a few seconds to limit.
+2) Pareto Rule - 20% of the benefit and 80% of the performance.
+3) Full Ham - >99% of the theoretical benefit.
+
+
 
 Limit function
 
