@@ -65,3 +65,9 @@ display(fig)
 # Save to HTML (PDF export requires additional tools like wkhtmltopdf)
 fig.write_html("/dbfs/FileStore/tables/plotly_colored_table.html")
 displayHTML('<a href="/files/tables/plotly_colored_table.html" target="_blank">Download HTML</a>')
+
+
+# After saving HTML
+dbutils.fs.mkdirs("/dbfs/FileStore/tables/")
+!wkhtmltopdf /dbfs/FileStore/tables/plotly_colored_table.html /dbfs/FileStore/tables/plotly_colored_table.pdf
+displayHTML('<a href="/files/tables/plotly_colored_table.pdf" target="_blank">Download PDF</a>')
