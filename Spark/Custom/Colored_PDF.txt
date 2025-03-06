@@ -1,3 +1,7 @@
+WEEK_NBR, ALL_ROWS, AD_BLCK_NULL, FRCST_NULL, LOST_SALES_NULL, BOH_QTY_NULL, OOS_NULL, VELOCITY_NULL, ESR_DIFF, PCT_LOST_SALES_NULL, PCT_AD_BLCK_NULL, PCT_FRCST_NULL, PCT_BOH_NULL.  
+
+
+
 def highlight_cell(val, column_name):
     # dictionary flag
     thresholds = {
@@ -22,3 +26,42 @@ styled_df = pandas_df.style.apply(
     axis=0
 )
 display(styled_df)
+
+
+
+-------------
+
+
+import plotly.figure_factory as ff
+import pandas as pd
+from IPython.display import displayHTML
+
+pandas_df = df_pct.toPandas()
+
+def get_color(val, col):
+    thresholds = {
+        "PCT_FRCST_NULL": [(0.5, '#FF0000'), (0.4, '#FFFF00')],
+        "PCT_BOH_NULL": [(0.01, '#FF0000'), (0.001, '#FFFF00')],
+        "PCT_OOS_NULL": [(0.06, '#FF0000'), (0.05, '#FFFF00')],
+        "PCT_AD_BLCK_NULL": [(0.01, '#FF0000'), (0.001, '#FFFF00')],
+        "PCT_LOST_SALES_NULL": [(0.1, '#FF0000'), (0.08, '#FFFF00')],
+        "ESR_DIFF": [(0, '#FF0000', True)]
+    }
+    if col in thresholds:
+        for condition in thresholds[col]:
+            if len(condition) == 3 and condition[2] and val == condition[0]:
+                return condition[1]
+            elif len(condition) == 2 and val >= condition[0]:
+                return condition[1]
+    return '#FFFFFF'
+
+# Generate cell colors
+cell_colors = [[get_color(val, col) for val, col in zip(row, pandas_df.columns)] for row in pandas_df.values]
+
+fig = ff.create_table(pandas_df, colorscale=cell_colors)
+fig.update_layout(width=1200, height=min(500, len(pandas_df) * 50))
+display(fig)
+
+# Save to HTML (PDF export requires additional tools like wkhtmltopdf)
+fig.write_html("/dbfs/FileStore/tables/plotly_colored_table.html")
+displayHTML('<a href="/files/tables/plotly_colored_table.html" target="_blank">Download HTML</a>')
