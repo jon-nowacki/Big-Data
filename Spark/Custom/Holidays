@@ -42,3 +42,29 @@ print(get_relative_day(2025, 5, 0, -1))  # 2025-05-26
 print(get_relative_day(2025, 9, 0, 1))   # 2025-09-01
 
 
+
+def get_shopping_holidays(year):
+    # Thanksgiving date for calculations
+    thanksgiving = get_thanksgiving_date(year)
+    
+    holidays = [
+        # Fixed date holidays
+        {"name": "New Year's Day", "date": datetime(year, 1, 1)},
+        {"name": "Valentine's Day", "date": datetime(year, 2, 14)},
+        {"name": "St. Patrick's Day", "date": datetime(year, 3, 17)},
+        {"name": "Mother's Day", "date": get_relative_day(year, 5, 6, 2)},  # 2nd Sunday in May
+        {"name": "Memorial Day", "date": get_relative_day(year, 5, 0, -1)},  # Last Monday in May
+        {"name": "Father's Day", "date": get_relative_day(year, 6, 6, 3)},  # 3rd Sunday in June
+        {"name": "Independence Day", "date": datetime(year, 7, 4)},
+        {"name": "Labor Day", "date": get_relative_day(year, 9, 0, 1)},  # First Monday in September
+        {"name": "Halloween", "date": datetime(year, 10, 31)},
+        {"name": "Christmas Eve", "date": datetime(year, 12, 24)},
+        {"name": "Christmas Day", "date": datetime(year, 12, 25)},
+        {"name": "New Year's Eve", "date": datetime(year, 12, 31)},
+        # Variable date holidays
+        {"name": "Thanksgiving", "date": thanksgiving},
+        {"name": "Black Friday", "date": thanksgiving + timedelta(days=1)}
+    ]
+    return holidays
+
+
