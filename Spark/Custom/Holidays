@@ -1,0 +1,44 @@
+from datetime import datetime
+import calendar
+
+def get_relative_day(year, month, weekday, iteration):
+    """
+    Get the nth occurrence of a specific weekday in a given month and year.
+    
+    Args:
+        year (int): The year
+        month (int): The month (1-12)
+        weekday (int): Day of week (0 = Monday, 1 = Tuesday, ..., 6 = Sunday)
+        iteration (int): Which occurrence (1 = first, 2 = second, -1 = last, -2 = second-to-last, etc.)
+    
+    Returns:
+        datetime: Date of the specified occurrence
+    """
+    cal = calendar.Calendar()
+    month_days = cal.monthdayscalendar(year, month)
+    
+    # Get all occurrences of the specified weekday in the month
+    days = [week[weekday] for week in month_days if week[weekday] != 0]
+    
+    # Handle positive and negative iterations
+    if iteration > 0:
+        # Positive iteration (1st, 2nd, 3rd, etc.)
+        if iteration <= len(days):
+            return datetime(year, month, days[iteration - 1])
+        else:
+            raise ValueError(f"There are only {len(days)} {calendar.day_name[weekday]}s in {calendar.month_name[month]} {year}")
+    else:
+        # Negative iteration (last, second-to-last, etc.)
+        if abs(iteration) <= len(days):
+            return datetime(year, month, days[iteration])
+        else:
+            raise ValueError(f"There are only {len(days)} {calendar.day_name[weekday]}s in {calendar.month_name[month]} {year}")
+
+# Example usage:
+# Last Monday in May 2025 (weekday 0 = Monday)
+print(get_relative_day(2025, 5, 0, -1))  # 2025-05-26
+
+# First Monday in September 2025
+print(get_relative_day(2025, 9, 0, 1))   # 2025-09-01
+
+
