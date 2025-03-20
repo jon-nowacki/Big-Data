@@ -1,4 +1,4 @@
-'''
+```
 import polars as pl
 
 # Assuming your table is in a Databricks table or file (e.g., Parquet)
@@ -18,4 +18,4 @@ rows_with_nulls = df.select(
 null_row_count = rows_with_nulls.filter(pl.col("has_null")).height
 
 print(f"Number of rows with null values: {null_row_count}")
-'''
+```
