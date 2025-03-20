@@ -17,10 +17,7 @@ df.show()
 
 
 ```
-df = df.select([when(col(c).isNull(), 1).otherwise(0).alias(c) for c in df.columns])
 
-
-```
 from pyspark.sql.functions import col, when, count
 
 # Load your table (e.g., Delta, Parquet)
